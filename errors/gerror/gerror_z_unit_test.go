@@ -2,18 +2,19 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/gogf/gf.
+// You can obtain one at https://github.com/zhwei820/g.
 
 package gerror_test
 
 import (
 	"errors"
 	"fmt"
-	"github.com/gogf/gf/internal/json"
 	"testing"
 
-	"github.com/gogf/gf/errors/gerror"
-	"github.com/gogf/gf/test/gtest"
+	"github.com/zhwei820/g/internal/json"
+
+	"github.com/zhwei820/g/errors/gerror"
+	"github.com/zhwei820/g/test/gtest"
 )
 
 func nilError() error {

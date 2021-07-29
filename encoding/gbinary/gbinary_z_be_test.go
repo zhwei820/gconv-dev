@@ -2,15 +2,15 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/gogf/gf.
+// You can obtain one at https://github.com/zhwei820/g.
 
 package gbinary_test
 
 import (
 	"testing"
 
-	"github.com/gogf/gf/encoding/gbinary"
-	"github.com/gogf/gf/test/gtest"
+	"github.com/zhwei820/g/encoding/gbinary"
+	"github.com/zhwei820/g/test/gtest"
 )
 
 func Test_BeEncodeAndBeDecode(t *testing.T) {

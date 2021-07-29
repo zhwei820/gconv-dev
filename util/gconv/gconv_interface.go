@@ -6,8 +6,6 @@
 
 package gconv
 
-import "github.com/zhwei820/g/os/gtime"
-
 // apiString is used for type assert api for String().
 type apiString interface {
 	String() string
@@ -93,9 +91,4 @@ type apiUnmarshalText interface {
 // apiSet is the interface for custom value assignment.
 type apiSet interface {
 	Set(value interface{}) (old interface{})
-}
-
-// apiGTime is the interface for gtime.Time converting.
-type apiGTime interface {
-	GTime(format ...string) *gtime.Time
 }

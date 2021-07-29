@@ -92,17 +92,6 @@ func Benchmark_Str_To_Float64(b *testing.B) {
 	}
 }
 
-func Benchmark_Str_To_Time(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Time(valueStr)
-	}
-}
-
-func Benchmark_Str_To_TimeDuration(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Duration(valueStr)
-	}
-}
 
 func Benchmark_Str_To_Bytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {

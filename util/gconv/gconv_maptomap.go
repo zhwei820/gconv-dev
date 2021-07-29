@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/zhwei820/g/errors/gerror"
 	"github.com/zhwei820/g/internal/json"
 )
 
@@ -97,7 +96,7 @@ func doMapToMap(params interface{}, pointer interface{}, mapping ...map[string]s
 			if e, ok := exception.(errorStack); ok {
 				err = e
 			} else {
-				err = exception
+				err = e
 			}
 		}
 	}()

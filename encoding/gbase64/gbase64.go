@@ -2,15 +2,16 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/gogf/gf.
+// You can obtain one at https://github.com/zhwei820/g.
 
 // Package gbase64 provides useful API for BASE64 encoding/decoding algorithm.
 package gbase64
 
 import (
 	"encoding/base64"
-	"github.com/gogf/gf/util/gconv"
 	"io/ioutil"
+
+	"github.com/zhwei820/g/util/gconv"
 )
 
 // Encode encodes bytes with BASE64 algorithm.

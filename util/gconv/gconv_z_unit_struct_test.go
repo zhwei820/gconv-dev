@@ -10,10 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zhwei820/g/container/gvar"
-	"github.com/zhwei820/g/frame/g"
+	"github.com/zhwei820/g"
 	"github.com/zhwei820/g/internal/json"
-	"github.com/zhwei820/g/os/gtime"
 	"github.com/zhwei820/g/test/gtest"
 	"github.com/zhwei820/g/util/gconv"
 )
@@ -564,41 +562,6 @@ func Test_Struct_Time(t *testing.T) {
 		t.Assert(user.CreateTime.UTC().String(), now.UTC().String())
 	})
 
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime *gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": &now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
-
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": &now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
-
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
 }
 
 // Auto create struct when given pointer.
@@ -1140,28 +1103,4 @@ func Test_Struct_JsonParam(t *testing.T) {
 		t.Assert(a.Id, 1)
 		t.Assert(a.Name, "john")
 	})
-}
-
-func Test_Struct_GVarAttribute(t *testing.T) {
-	type A struct {
-		Id     int    `json:"id"`
-		Name   string `json:"name"`
-		Status bool   `json:"status"`
-	}
-	gtest.C(t, func(t *gtest.T) {
-		var (
-			a    = A{}
-			data = g.Map{
-				"id":     100,
-				"name":   "john",
-				"status": gvar.New(false),
-			}
-		)
-		err := gconv.Struct(data, &a)
-		t.Assert(err, nil)
-		t.Assert(a.Id, data["id"])
-		t.Assert(a.Name, data["name"])
-		t.Assert(a.Status, data["status"])
-	})
-
 }

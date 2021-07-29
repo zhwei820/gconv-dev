@@ -204,31 +204,9 @@ func doConvert(input doConvertInput) interface{} {
 	case "[]string":
 		return Strings(input.FromValue)
 
-	case "Time", "time.Time":
-		if len(input.Extra) > 0 {
-			return Time(input.FromValue, String(input.Extra[0]))
-		}
-		return Time(input.FromValue)
-	case "*time.Time":
-		var v interface{}
-		if len(input.Extra) > 0 {
-			v = Time(input.FromValue, String(input.Extra[0]))
-		} else {
-			if _, ok := input.FromValue.(*time.Time); ok {
-				return input.FromValue
-			}
-			v = Time(input.FromValue)
-		}
-		return &v
+	case "Time", "time.Time", "*time.Time":
 
-	case "Duration", "time.Duration":
-		return Duration(input.FromValue)
-	case "*time.Duration":
-		if _, ok := input.FromValue.(*time.Duration); ok {
-			return input.FromValue
-		}
-		v := Duration(input.FromValue)
-		return &v
+		return input.FromValue
 
 	case "map[string]string":
 		return MapStrStr(input.FromValue)

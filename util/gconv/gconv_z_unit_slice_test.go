@@ -9,9 +9,7 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g/container/gvar"
-
-	"github.com/zhwei820/g/frame/g"
+	"github.com/zhwei820/g"
 	"github.com/zhwei820/g/test/gtest"
 	"github.com/zhwei820/g/util/gconv"
 )
@@ -27,13 +25,7 @@ func Test_Slice(t *testing.T) {
 		t.AssertEQ(gconv.Floats(value), []float64{123.456})
 		t.AssertEQ(gconv.Interfaces(value), []interface{}{123.456})
 	})
-	gtest.C(t, func(t *gtest.T) {
-		s := []*gvar.Var{
-			gvar.New(1),
-			gvar.New(2),
-		}
-		t.AssertEQ(gconv.SliceInt64(s), []int64{1, 2})
-	})
+
 }
 
 func Test_Slice_Empty(t *testing.T) {

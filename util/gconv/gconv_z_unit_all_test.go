@@ -10,8 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zhwei820/g/frame/g"
-	"github.com/zhwei820/g/os/gtime"
+	"github.com/zhwei820/g"
 	"github.com/zhwei820/g/test/gtest"
 	"github.com/zhwei820/g/util/gconv"
 )
@@ -634,13 +633,6 @@ func Test_Convert_All(t *testing.T) {
 		t.AssertEQ(gconv.Convert([]byte{}, "[]byte"), []uint8{})
 		t.AssertEQ(gconv.Convert([]string{}, "[]string"), []string{})
 		t.AssertEQ(gconv.Convert([2]int{1, 2}, "[]int"), []int{1, 2})
-		t.AssertEQ(gconv.Convert("1989-01-02", "Time", "Y-m-d"), gconv.Time("1989-01-02", "Y-m-d"))
-		t.AssertEQ(gconv.Convert(1989, "Time"), gconv.Time("1970-01-01 08:33:09 +0800 CST"))
-		t.AssertEQ(gconv.Convert(gtime.Now(), "gtime.Time", 1), *gtime.New())
-		t.AssertEQ(gconv.Convert(1989, "gtime.Time"), *gconv.GTime("1970-01-01 08:33:09 +0800 CST"))
-		t.AssertEQ(gconv.Convert(gtime.Now(), "*gtime.Time", 1), gtime.New())
-		t.AssertEQ(gconv.Convert(gtime.Now(), "GTime", 1), *gtime.New())
-		t.AssertEQ(gconv.Convert(1989, "*gtime.Time"), gconv.GTime(1989))
 		t.AssertEQ(gconv.Convert(1989, "Duration"), time.Duration(int64(1989)))
 		t.AssertEQ(gconv.Convert("1989", "Duration"), time.Duration(int64(1989)))
 		t.AssertEQ(gconv.Convert("1989", ""), "1989")
@@ -1333,39 +1325,4 @@ func Test_Struct_Time_All(t *testing.T) {
 		t.Assert(user.CreateTime.UTC().String(), now.UTC().String())
 	})
 
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime *gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": &now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
-
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": &now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
-
-	gtest.C(t, func(t *gtest.T) {
-		type User struct {
-			CreateTime gtime.Time
-		}
-		now := time.Now()
-		user := new(User)
-		gconv.Struct(g.Map{
-			"create_time": now,
-		}, user)
-		t.Assert(user.CreateTime.Time.UTC().String(), now.UTC().String())
-	})
 }

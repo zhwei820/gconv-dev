@@ -11,7 +11,7 @@ import (
 
 	"github.com/zhwei820/g/internal/structs"
 
-	"github.com/zhwei820/g/frame/g"
+	"github.com/zhwei820/g"
 
 	"github.com/zhwei820/g/test/gtest"
 )

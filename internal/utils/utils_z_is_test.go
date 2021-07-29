@@ -9,7 +9,7 @@ package utils_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g/frame/g"
+	"github.com/zhwei820/g"
 	"github.com/zhwei820/g/internal/utils"
 	"github.com/zhwei820/g/test/gtest"
 )
