@@ -9,10 +9,9 @@
 package grand_test
 
 import (
+	"strings"
 	"testing"
 	"time"
-
-	"github.com/zhwei820/g/text/gstr"
 
 	"github.com/zhwei820/g/test/gtest"
 	"github.com/zhwei820/g/util/grand"
@@ -145,16 +144,16 @@ func Test_RandStr(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		for i := 0; i < 10; i++ {
 			s := grand.Str(str, 100000)
-			t.Assert(gstr.Contains(s, "我"), true)
-			t.Assert(gstr.Contains(s, "爱"), true)
-			t.Assert(gstr.Contains(s, "G"), true)
-			t.Assert(gstr.Contains(s, "o"), true)
-			t.Assert(gstr.Contains(s, "F"), true)
-			t.Assert(gstr.Contains(s, "r"), true)
-			t.Assert(gstr.Contains(s, "a"), true)
-			t.Assert(gstr.Contains(s, "m"), true)
-			t.Assert(gstr.Contains(s, "e"), true)
-			t.Assert(gstr.Contains(s, "w"), false)
+			t.Assert(strings.Contains(s, "我"), true)
+			t.Assert(strings.Contains(s, "爱"), true)
+			t.Assert(strings.Contains(s, "G"), true)
+			t.Assert(strings.Contains(s, "o"), true)
+			t.Assert(strings.Contains(s, "F"), true)
+			t.Assert(strings.Contains(s, "r"), true)
+			t.Assert(strings.Contains(s, "a"), true)
+			t.Assert(strings.Contains(s, "m"), true)
+			t.Assert(strings.Contains(s, "e"), true)
+			t.Assert(strings.Contains(s, "w"), false)
 		}
 	})
 }
