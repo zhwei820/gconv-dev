@@ -10,7 +10,9 @@
 package gconv
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"reflect"
 	"strconv"
 	"strings"
@@ -20,6 +22,23 @@ import (
 
 	"github.com/zhwei820/gconv/encoding/gbinary"
 )
+
+// NewDecoder adapts to json/stream NewDecoder API.
+//
+// NewDecoder returns a new decoder that reads from r.
+//
+// Instead of a json/encoding Decoder, an Decoder is returned
+// Refer to https://godoc.org/encoding/json#NewDecoder for more information.
+func NewDecoder(reader io.Reader) *json.Decoder {
+	return json.NewDecoder(reader)
+}
+
+// UnmarshalUseNumber decodes the json data bytes to target interface using number option.
+func UnmarshalUseNumber(data []byte, v interface{}) error {
+	decoder := NewDecoder(bytes.NewReader(data))
+	decoder.UseNumber()
+	return decoder.Decode(v)
+}
 
 type (
 	// errorStack is the interface for Stack feature.

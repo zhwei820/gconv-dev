@@ -9,9 +9,8 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_Structs_WithTag(t *testing.T) {
@@ -21,12 +20,12 @@ func Test_Structs_WithTag(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		var users []User
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"id":   1,
 				"name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"id":   2,
 				"name": "name2",
 			},
@@ -41,12 +40,12 @@ func Test_Structs_WithTag(t *testing.T) {
 	})
 	gtest.C(t, func(t *gtest.T) {
 		var users []*User
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"id":   1,
 				"name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"id":   2,
 				"name": "name2",
 			},
@@ -68,12 +67,12 @@ func Test_Structs_WithoutTag(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		var users []User
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"uid":       1,
 				"nick-name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"uid":       2,
 				"nick-name": "name2",
 			},
@@ -88,12 +87,12 @@ func Test_Structs_WithoutTag(t *testing.T) {
 	})
 	gtest.C(t, func(t *gtest.T) {
 		var users []*User
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"uid":       1,
 				"nick-name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"uid":       2,
 				"nick-name": "name2",
 			},
@@ -115,12 +114,12 @@ func Test_Structs_SliceParameter(t *testing.T) {
 			NickName string
 		}
 		var users []User
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"uid":       1,
 				"nick-name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"uid":       2,
 				"nick-name": "name2",
 			},
@@ -137,12 +136,12 @@ func Test_Structs_SliceParameter(t *testing.T) {
 			Users []User
 		}
 		var a A
-		params := g.Slice{
-			g.Map{
+		params := []interface{}{
+			map[string]interface{}{
 				"uid":       1,
 				"nick-name": "name1",
 			},
-			g.Map{
+			map[string]interface{}{
 				"uid":       2,
 				"nick-name": "name2",
 			},
@@ -195,9 +194,9 @@ func Test_Structs_IntSliceAttribute(t *testing.T) {
 		var (
 			array []*B
 		)
-		err := gconv.Structs(g.Slice{
-			g.Map{"id": nil, "name": "john"},
-			g.Map{"id": nil, "name": "smith"},
+		err := gconv.Structs([]interface{}{
+			map[string]interface{}{"id": nil, "name": "john"},
+			map[string]interface{}{"id": nil, "name": "smith"},
 		}, &array)
 		t.Assert(err, nil)
 		t.Assert(len(array), 2)

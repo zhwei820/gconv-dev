@@ -9,60 +9,59 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_MapToMap1(t *testing.T) {
 	// map[int]int -> map[string]string
 	// empty original map.
 	gtest.C(t, func(t *gtest.T) {
-		m1 := g.MapIntInt{}
-		m2 := g.MapStrStr{}
+		m1 := map[int]int{}
+		m2 := map[string]string{}
 		t.Assert(gconv.MapToMap(m1, &m2), nil)
 		t.Assert(len(m1), len(m2))
 	})
 	// map[int]int -> map[string]string
 	gtest.C(t, func(t *gtest.T) {
-		m1 := g.MapIntInt{
+		m1 := map[int]int{
 			1: 100,
 			2: 200,
 		}
-		m2 := g.MapStrStr{}
+		m2 := map[string]string{}
 		t.Assert(gconv.MapToMap(m1, &m2), nil)
 		t.Assert(m2["1"], m1[1])
 		t.Assert(m2["2"], m1[2])
 	})
 	// map[string]interface{} -> map[string]string
 	gtest.C(t, func(t *gtest.T) {
-		m1 := g.Map{
+		m1 := map[string]interface{}{
 			"k1": "v1",
 			"k2": "v2",
 		}
-		m2 := g.MapStrStr{}
+		m2 := map[string]string{}
 		t.Assert(gconv.MapToMap(m1, &m2), nil)
 		t.Assert(m2["k1"], m1["k1"])
 		t.Assert(m2["k2"], m1["k2"])
 	})
 	// map[string]string -> map[string]interface{}
 	gtest.C(t, func(t *gtest.T) {
-		m1 := g.MapStrStr{
+		m1 := map[string]string{
 			"k1": "v1",
 			"k2": "v2",
 		}
-		m2 := g.Map{}
+		m2 := map[string]interface{}{}
 		t.Assert(gconv.MapToMap(m1, &m2), nil)
 		t.Assert(m2["k1"], m1["k1"])
 		t.Assert(m2["k2"], m1["k2"])
 	})
 	// map[string]interface{} -> map[interface{}]interface{}
 	gtest.C(t, func(t *gtest.T) {
-		m1 := g.MapStrStr{
+		m1 := map[string]string{
 			"k1": "v1",
 			"k2": "v2",
 		}
-		m2 := g.MapAnyAny{}
+		m2 := map[interface{}]interface{}{}
 		t.Assert(gconv.MapToMap(m1, &m2), nil)
 		t.Assert(m2["k1"], m1["k1"])
 		t.Assert(m2["k2"], m1["k2"])
@@ -74,8 +73,8 @@ func Test_MapToMap2(t *testing.T) {
 		Id   int
 		Name string
 	}
-	params := g.Map{
-		"key": g.Map{
+	params := map[string]interface{}{
+		"key": map[string]interface{}{
 			"id":   1,
 			"name": "john",
 		},
@@ -127,8 +126,8 @@ func Test_MapToMapDeep(t *testing.T) {
 		Base
 		Name string
 	}
-	params := g.Map{
-		"key": g.Map{
+	params := map[string]interface{}{
+		"key": map[string]interface{}{
 			"id":   1,
 			"name": "john",
 		},
@@ -144,19 +143,19 @@ func Test_MapToMapDeep(t *testing.T) {
 }
 
 func Test_MapToMaps(t *testing.T) {
-	params := g.Slice{
-		g.Map{"id": 1, "name": "john"},
-		g.Map{"id": 2, "name": "smith"},
+	params := []interface{}{
+		map[string]interface{}{"id": 1, "name": "john"},
+		map[string]interface{}{"id": 2, "name": "smith"},
 	}
 	gtest.C(t, func(t *gtest.T) {
-		var s []g.Map
+		var s []map[string]interface{}
 		err := gconv.MapToMaps(params, &s)
 		t.AssertNil(err)
 		t.Assert(len(s), 2)
 		t.Assert(s, params)
 	})
 	gtest.C(t, func(t *gtest.T) {
-		var s []*g.Map
+		var s []*map[string]interface{}
 		err := gconv.MapToMaps(params, &s)
 		t.AssertNil(err)
 		t.Assert(len(s), 2)
@@ -169,18 +168,18 @@ func Test_MapToMaps_StructParams(t *testing.T) {
 		Id   int
 		Name string
 	}
-	params := g.Slice{
+	params := []interface{}{
 		User{1, "name1"},
 		User{2, "name2"},
 	}
 	gtest.C(t, func(t *gtest.T) {
-		var s []g.Map
+		var s []map[string]interface{}
 		err := gconv.MapToMaps(params, &s)
 		t.AssertNil(err)
 		t.Assert(len(s), 2)
 	})
 	gtest.C(t, func(t *gtest.T) {
-		var s []*g.Map
+		var s []*map[string]interface{}
 		err := gconv.MapToMaps(params, &s)
 		t.AssertNil(err)
 		t.Assert(len(s), 2)

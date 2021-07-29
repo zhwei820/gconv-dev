@@ -9,9 +9,8 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_Scan_StructStructs(t *testing.T) {
@@ -24,7 +23,7 @@ func Test_Scan_StructStructs(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		var (
 			user   = new(User)
-			params = g.Map{
+			params = map[string]interface{}{
 				"uid":   1,
 				"name":  "john",
 				"PASS1": "123",
@@ -43,14 +42,14 @@ func Test_Scan_StructStructs(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		var (
 			users  []User
-			params = g.Slice{
-				g.Map{
+			params = []interface{}{
+				map[string]interface{}{
 					"uid":   1,
 					"name":  "john1",
 					"PASS1": "111",
 					"PASS2": "222",
 				},
-				g.Map{
+				map[string]interface{}{
 					"uid":   2,
 					"name":  "john2",
 					"PASS1": "333",
@@ -60,7 +59,7 @@ func Test_Scan_StructStructs(t *testing.T) {
 		)
 		err := gconv.Scan(params, &users)
 		t.AssertNil(err)
-		t.Assert(users, g.Slice{
+		t.Assert(users, []interface{}{
 			&User{
 				Uid:   1,
 				Name:  "john1",
@@ -108,7 +107,7 @@ func Test_Scan_StructStr(t *testing.T) {
 		)
 		err := gconv.Scan(params, &users)
 		t.Assert(err, nil)
-		t.Assert(users, g.Slice{
+		t.Assert(users, []interface{}{
 			&User{
 				Uid:   1,
 				Name:  "john1",
@@ -128,7 +127,7 @@ func Test_Scan_StructStr(t *testing.T) {
 func Test_Scan_Map(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		var m map[string]string
-		data := g.Map{
+		data := map[string]interface{}{
 			"k1": "v1",
 			"k2": "v2",
 		}
@@ -138,7 +137,7 @@ func Test_Scan_Map(t *testing.T) {
 	})
 	gtest.C(t, func(t *gtest.T) {
 		var m map[int]int
-		data := g.Map{
+		data := map[string]interface{}{
 			"1": "11",
 			"2": "22",
 		}
@@ -152,7 +151,7 @@ func Test_Scan_Map(t *testing.T) {
 		data := `{"k1":"v1","k2":"v2"}`
 		err := gconv.Scan(data, &m)
 		t.AssertNil(err)
-		t.Assert(m, g.Map{
+		t.Assert(m, map[string]interface{}{
 			"k1": "v1",
 			"k2": "v2",
 		})
@@ -162,12 +161,12 @@ func Test_Scan_Map(t *testing.T) {
 func Test_Scan_Maps(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		var maps []map[string]string
-		data := g.Slice{
-			g.Map{
+		data := []interface{}{
+			map[string]interface{}{
 				"k1": "v1",
 				"k2": "v2",
 			},
-			g.Map{
+			map[string]interface{}{
 				"k3": "v3",
 				"k4": "v4",
 			},
@@ -182,12 +181,12 @@ func Test_Scan_Maps(t *testing.T) {
 		data := `[{"k1":"v1","k2":"v2"},{"k3":"v3","k4":"v4"}]`
 		err := gconv.Scan(data, &maps)
 		t.AssertNil(err)
-		t.Assert(maps, g.Slice{
-			g.Map{
+		t.Assert(maps, []interface{}{
+			map[string]interface{}{
 				"k1": "v1",
 				"k2": "v2",
 			},
-			g.Map{
+			map[string]interface{}{
 				"k3": "v3",
 				"k4": "v4",
 			},

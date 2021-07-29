@@ -10,9 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 type apiString interface {
@@ -754,13 +753,13 @@ func Test_Map_Basic_All(t *testing.T) {
 		m3 := map[float64]float32{
 			1.22: 3.1,
 		}
-		t.Assert(gconv.Map(m1), g.Map{
+		t.Assert(gconv.Map(m1), map[string]interface{}{
 			"k": "v",
 		})
-		t.Assert(gconv.Map(m2), g.Map{
+		t.Assert(gconv.Map(m2), map[string]interface{}{
 			"3": "v",
 		})
-		t.Assert(gconv.Map(m3), g.Map{
+		t.Assert(gconv.Map(m3), map[string]interface{}{
 			"1.22": "3.1",
 		})
 		t.AssertEQ(gconv.Map(nil), nil)
@@ -887,7 +886,7 @@ func Test_Map_PrivateAttribute_All(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		user := &User{1, "john"}
-		t.Assert(gconv.Map(user), g.Map{"Id": 1})
+		t.Assert(gconv.Map(user), map[string]interface{}{"Id": 1})
 	})
 }
 
@@ -949,14 +948,14 @@ func Test_Struct_Basic1_All(t *testing.T) {
 		}
 		// 使用默认映射规则绑定属性值到对象
 		user := new(User)
-		params1 := g.Map{
+		params1 := map[string]interface{}{
 			"uid":       1,
 			"Name":      "john",
 			"siteurl":   "https://goframe.org",
 			"nick_name": "johng",
 			"PASS1":     "123",
 			"PASS2":     "456",
-			"As":        g.Map{"Name": 1, "Result": "22222"},
+			"As":        map[string]interface{}{"Name": 1, "Result": "22222"},
 			"Ass":       &Score{11, "11"},
 			"Assb":      []string{"wwww"},
 		}
@@ -977,7 +976,7 @@ func Test_Struct_Basic1_All(t *testing.T) {
 
 		// 使用struct tag映射绑定属性值到对象
 		user = new(User)
-		params2 := g.Map{
+		params2 := map[string]interface{}{
 			"uid":       2,
 			"name":      "smith",
 			"site-url":  "https://goframe.org",
@@ -1010,7 +1009,7 @@ func Test_Struct_Basic2_All(t *testing.T) {
 			Pass2   string
 		}
 		user := new(User)
-		params := g.Map{
+		params := map[string]interface{}{
 			"uid":      1,
 			"Name":     "john",
 			"site_url": "https://goframe.org",
@@ -1038,7 +1037,7 @@ func Test_Struct_Basic3_All(t *testing.T) {
 			Name *string
 		}
 		user := new(User)
-		params := g.Map{
+		params := map[string]interface{}{
 			"uid":  1,
 			"Name": "john",
 		}
@@ -1058,7 +1057,7 @@ func Test_Struct_Attr_Slice_All(t *testing.T) {
 		}
 		scores := []interface{}{99, 100, 60, 140}
 		user := new(User)
-		if err := gconv.Struct(g.Map{"Scores": scores}, user); err != nil {
+		if err := gconv.Struct(map[string]interface{}{"Scores": scores}, user); err != nil {
 			gtest.Error(err)
 		} else {
 			t.Assert(user, &User{
@@ -1257,7 +1256,7 @@ func Test_Struct_PrivateAttribute_All(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		user := new(User)
-		err := gconv.Struct(g.Map{"id": 1, "name": "john"}, user)
+		err := gconv.Struct(map[string]interface{}{"id": 1, "name": "john"}, user)
 		t.Assert(err, nil)
 		t.Assert(user.Id, 1)
 		t.Assert(user.name, "")
@@ -1280,7 +1279,7 @@ func Test_Struct_Embedded_All(t *testing.T) {
 			Password string `json:"password"`
 			Nickname string `json:"nickname"`
 		}
-		data := g.Map{
+		data := map[string]interface{}{
 			"id":          100,
 			"uid":         101,
 			"passport":    "t1",
@@ -1304,7 +1303,7 @@ func Test_Struct_Time_All(t *testing.T) {
 		}
 		now := time.Now()
 		user := new(User)
-		gconv.Struct(g.Map{
+		gconv.Struct(map[string]interface{}{
 			"create_time": now,
 		}, user)
 		t.Assert(user.CreateTime.UTC().String(), now.UTC().String())
@@ -1316,7 +1315,7 @@ func Test_Struct_Time_All(t *testing.T) {
 		}
 		now := time.Now()
 		user := new(User)
-		gconv.Struct(g.Map{
+		gconv.Struct(map[string]interface{}{
 			"create_time": &now,
 		}, user)
 		t.Assert(user.CreateTime.UTC().String(), now.UTC().String())

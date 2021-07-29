@@ -9,9 +9,8 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_Slice(t *testing.T) {
@@ -73,13 +72,13 @@ func Test_Slice_Empty(t *testing.T) {
 func Test_Slice_Interfaces(t *testing.T) {
 	// map
 	gtest.C(t, func(t *gtest.T) {
-		array := gconv.Interfaces(g.Map{
+		array := gconv.Interfaces(map[string]interface{}{
 			"id":   1,
 			"name": "john",
 		})
 		t.Assert(len(array), 1)
-		t.Assert(array[0].(g.Map)["id"], 1)
-		t.Assert(array[0].(g.Map)["name"], "john")
+		t.Assert(array[0].(map[string]interface{})["id"], 1)
+		t.Assert(array[0].(map[string]interface{})["name"], "john")
 	})
 	// struct
 	gtest.C(t, func(t *gtest.T) {
@@ -123,7 +122,7 @@ func Test_Slice_Structs(t *testing.T) {
 
 	gtest.C(t, func(t *gtest.T) {
 		users := make([]User, 0)
-		params := []g.Map{
+		params := []map[string]interface{}{
 			{"id": 1, "name": "john", "age": 18},
 			{"id": 2, "name": "smith", "age": 20},
 		}

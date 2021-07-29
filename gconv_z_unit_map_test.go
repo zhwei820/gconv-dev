@@ -9,11 +9,8 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
-	"github.com/zhwei820/gconv/util/gutil"
-
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_Map_Basic(t *testing.T) {
@@ -27,13 +24,13 @@ func Test_Map_Basic(t *testing.T) {
 		m3 := map[float64]float32{
 			1.22: 3.1,
 		}
-		t.Assert(gconv.Map(m1), g.Map{
+		t.Assert(gconv.Map(m1), map[string]interface{}{
 			"k": "v",
 		})
-		t.Assert(gconv.Map(m2), g.Map{
+		t.Assert(gconv.Map(m2), map[string]interface{}{
 			"3": "v",
 		})
-		t.Assert(gconv.Map(m3), g.Map{
+		t.Assert(gconv.Map(m3), map[string]interface{}{
 			"1.22": "3.1",
 		})
 	})
@@ -41,25 +38,25 @@ func Test_Map_Basic(t *testing.T) {
 
 func Test_Map_Slice(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
-		slice1 := g.Slice{"1", "2", "3", "4"}
-		slice2 := g.Slice{"1", "2", "3"}
-		slice3 := g.Slice{}
-		t.Assert(gconv.Map(slice1), g.Map{
+		slice1 := []interface{}{"1", "2", "3", "4"}
+		slice2 := []interface{}{"1", "2", "3"}
+		slice3 := []interface{}{}
+		t.Assert(gconv.Map(slice1), map[string]interface{}{
 			"1": "2",
 			"3": "4",
 		})
-		t.Assert(gconv.Map(slice2), g.Map{
+		t.Assert(gconv.Map(slice2), map[string]interface{}{
 			"1": "2",
 			"3": nil,
 		})
-		t.Assert(gconv.Map(slice3), g.Map{})
+		t.Assert(gconv.Map(slice3), map[string]interface{}{})
 	})
 }
 
 func Test_Maps_Basic(t *testing.T) {
-	params := g.Slice{
-		g.Map{"id": 100, "name": "john"},
-		g.Map{"id": 200, "name": "smith"},
+	params := []interface{}{
+		map[string]interface{}{"id": 100, "name": "john"},
+		map[string]interface{}{"id": 200, "name": "smith"},
 	}
 	gtest.C(t, func(t *gtest.T) {
 		list := gconv.Maps(params)
@@ -200,7 +197,7 @@ func Test_Map_PrivateAttribute(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		user := &User{1, "john"}
-		t.Assert(gconv.Map(user), g.Map{"Id": 1})
+		t.Assert(gconv.Map(user), map[string]interface{}{"Id": 1})
 	})
 }
 
@@ -276,6 +273,10 @@ func Test_Map_Embedded2(t *testing.T) {
 		t.Assert(m["create_time"], user.CreateTime)
 	})
 }
+func MapContains(m map[string]interface{}, k string) bool {
+	_, ok := m[k]
+	return ok
+}
 
 func Test_MapDeep2(t *testing.T) {
 	type A struct {
@@ -305,16 +306,16 @@ func Test_MapDeep2(t *testing.T) {
 		mb := gconv.MapDeep(b)
 		mc := gconv.MapDeep(c)
 		md := gconv.MapDeep(d)
-		t.Assert(gutil.MapContains(mb, "F"), true)
-		t.Assert(gutil.MapContains(mb, "G"), true)
-		t.Assert(gutil.MapContains(mb, "H"), true)
-		t.Assert(gutil.MapContains(mc, "A"), true)
-		t.Assert(gutil.MapContains(mc, "F"), true)
-		t.Assert(gutil.MapContains(mc, "G"), false)
-		t.Assert(gutil.MapContains(md, "F"), true)
-		t.Assert(gutil.MapContains(md, "I"), true)
-		t.Assert(gutil.MapContains(md, "H"), false)
-		t.Assert(gutil.MapContains(md, "G"), false)
+		t.Assert(MapContains(mb, "F"), true)
+		t.Assert(MapContains(mb, "G"), true)
+		t.Assert(MapContains(mb, "H"), true)
+		t.Assert(MapContains(mc, "A"), true)
+		t.Assert(MapContains(mc, "F"), true)
+		t.Assert(MapContains(mc, "G"), false)
+		t.Assert(MapContains(md, "F"), true)
+		t.Assert(MapContains(md, "I"), true)
+		t.Assert(MapContains(md, "H"), false)
+		t.Assert(MapContains(md, "G"), false)
 	})
 }
 
@@ -341,8 +342,8 @@ func Test_MapDeep3(t *testing.T) {
 			Nickname: "JohnGuo",
 		}
 		m := gconv.MapDeep(user)
-		t.Assert(m, g.Map{
-			"base": g.Map{
+		t.Assert(m, map[string]interface{}{
+			"base": map[string]interface{}{
 				"id":   user.UserBase.Id,
 				"date": user.UserBase.Date,
 			},
@@ -363,7 +364,7 @@ func Test_MapDeep3(t *testing.T) {
 			Nickname: "JohnGuo",
 		}
 		m := gconv.Map(user)
-		t.Assert(m, g.Map{
+		t.Assert(m, map[string]interface{}{
 			"base":     user.UserBase,
 			"passport": user.Passport,
 			"password": user.Password,

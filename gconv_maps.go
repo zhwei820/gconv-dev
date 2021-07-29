@@ -6,8 +6,6 @@
 
 package gconv
 
-import "encoding/json"
-
 // SliceMap is alias of Maps.
 func SliceMap(any interface{}) []map[string]interface{} {
 	return Maps(any)
@@ -33,7 +31,7 @@ func Maps(value interface{}, tags ...string) []map[string]interface{} {
 	case string:
 		list := make([]map[string]interface{}, 0)
 		if len(r) > 0 && r[0] == '[' && r[len(r)-1] == ']' {
-			if err := json.UnmarshalUseNumber([]byte(r), &list); err != nil {
+			if err := UnmarshalUseNumber([]byte(r), &list); err != nil {
 				return nil
 			}
 			return list
@@ -44,7 +42,7 @@ func Maps(value interface{}, tags ...string) []map[string]interface{} {
 	case []byte:
 		list := make([]map[string]interface{}, 0)
 		if len(r) > 0 && r[0] == '[' && r[len(r)-1] == ']' {
-			if err := json.UnmarshalUseNumber(r, &list); err != nil {
+			if err := UnmarshalUseNumber(r, &list); err != nil {
 				return nil
 			}
 			return list
@@ -79,7 +77,7 @@ func MapsDeep(value interface{}, tags ...string) []map[string]interface{} {
 	case string:
 		list := make([]map[string]interface{}, 0)
 		if len(r) > 0 && r[0] == '[' && r[len(r)-1] == ']' {
-			if err := json.UnmarshalUseNumber([]byte(r), &list); err != nil {
+			if err := UnmarshalUseNumber([]byte(r), &list); err != nil {
 				return nil
 			}
 			return list
@@ -90,7 +88,7 @@ func MapsDeep(value interface{}, tags ...string) []map[string]interface{} {
 	case []byte:
 		list := make([]map[string]interface{}, 0)
 		if len(r) > 0 && r[0] == '[' && r[len(r)-1] == ']' {
-			if err := json.UnmarshalUseNumber(r, &list); err != nil {
+			if err := UnmarshalUseNumber(r, &list); err != nil {
 				return nil
 			}
 			return list

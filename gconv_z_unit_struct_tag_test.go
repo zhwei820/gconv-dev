@@ -9,9 +9,8 @@ package gconv_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_StructTag(t *testing.T) {
@@ -23,7 +22,7 @@ func Test_StructTag(t *testing.T) {
 	}
 	gtest.C(t, func(t *gtest.T) {
 		user := new(User)
-		params1 := g.Map{
+		params1 := map[string]interface{}{
 			"uid":       1,
 			"Name":      "john",
 			"password1": "123",
@@ -41,7 +40,7 @@ func Test_StructTag(t *testing.T) {
 	})
 	gtest.C(t, func(t *gtest.T) {
 		user := new(User)
-		params1 := g.Map{
+		params1 := map[string]interface{}{
 			"uid":       1,
 			"Name":      "john",
 			"password1": "123",
@@ -59,7 +58,7 @@ func Test_StructTag(t *testing.T) {
 	})
 	gtest.C(t, func(t *gtest.T) {
 		user := new(User)
-		params2 := g.Map{
+		params2 := map[string]interface{}{
 			"uid":       2,
 			"name":      "smith",
 			"password1": "111",

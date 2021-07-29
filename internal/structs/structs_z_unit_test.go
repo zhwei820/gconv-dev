@@ -9,7 +9,6 @@ package structs_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
 	"github.com/zhwei820/gconv/internal/structs"
 
 	"github.com/zhwei820/gconv/test/gtest"
@@ -24,16 +23,16 @@ func Test_Basic(t *testing.T) {
 		}
 		var user User
 		m, _ := structs.TagMapName(user, []string{"params"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"params"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 
 		m, _ = structs.TagMapName(&user, []string{"params", "my-tag1"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"my-tag1", "params"})
-		t.Assert(m, g.Map{"name": "Name", "pass1": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass1": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"my-tag2", "params"})
-		t.Assert(m, g.Map{"name": "Name", "pass2": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass2": "Pass"})
 	})
 
 	gtest.C(t, func(t *gtest.T) {
@@ -48,7 +47,7 @@ func Test_Basic(t *testing.T) {
 		}
 		user := new(UserWithBase)
 		m, _ := structs.TagMapName(user, []string{"params"})
-		t.Assert(m, g.Map{
+		t.Assert(m, map[string]interface{}{
 			"base":      "Base",
 			"password1": "Pass1",
 			"password2": "Pass2",
@@ -73,9 +72,9 @@ func Test_Basic(t *testing.T) {
 		user1 := new(UserWithEmbeddedAttribute)
 		user2 := new(UserWithoutEmbeddedAttribute)
 		m, _ := structs.TagMapName(user1, []string{"params"})
-		t.Assert(m, g.Map{"password1": "Pass1", "password2": "Pass2"})
+		t.Assert(m, map[string]interface{}{"password1": "Pass1", "password2": "Pass2"})
 		m, _ = structs.TagMapName(user2, []string{"params"})
-		t.Assert(m, g.Map{})
+		t.Assert(m, map[string]interface{}{})
 	})
 }
 
@@ -88,16 +87,16 @@ func Test_StructOfNilPointer(t *testing.T) {
 		}
 		var user *User
 		m, _ := structs.TagMapName(user, []string{"params"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"params"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 
 		m, _ = structs.TagMapName(&user, []string{"params", "my-tag1"})
-		t.Assert(m, g.Map{"name": "Name", "pass": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"my-tag1", "params"})
-		t.Assert(m, g.Map{"name": "Name", "pass1": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass1": "Pass"})
 		m, _ = structs.TagMapName(&user, []string{"my-tag2", "params"})
-		t.Assert(m, g.Map{"name": "Name", "pass2": "Pass"})
+		t.Assert(m, map[string]interface{}{"name": "Name", "pass2": "Pass"})
 	})
 }
 
@@ -239,6 +238,6 @@ func TestType_FieldKeys(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A).Array)
 		t.AssertNil(err)
-		t.Assert(r.FieldKeys(), g.Slice{"Id", "Name"})
+		t.Assert(r.FieldKeys(), []interface{}{"Id", "Name"})
 	})
 }

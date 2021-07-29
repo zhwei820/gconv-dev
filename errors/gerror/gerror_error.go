@@ -13,8 +13,6 @@ import (
 	"io"
 	"runtime"
 	"strings"
-
-	"github.com/zhwei820/gconv/internal/utils"
 )
 
 // Error is custom error for additional features.
@@ -186,11 +184,7 @@ func formatSubStack(st stack, buffer *bytes.Buffer) {
 		if fn := runtime.FuncForPC(p - 1); fn != nil {
 			file, line := fn.FileLine(p - 1)
 			// Custom filtering.
-			if !utils.IsDebugEnabled() {
-				if strings.Contains(file, utils.StackFilterKeyForGoFrame) {
-					continue
-				}
-			} else {
+			{
 				if strings.Contains(file, stackFilterKeyLocal) {
 					continue
 				}

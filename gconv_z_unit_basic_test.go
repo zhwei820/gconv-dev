@@ -9,8 +9,8 @@ package gconv_test
 import (
 	"testing"
 
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 func Test_Basic(t *testing.T) {

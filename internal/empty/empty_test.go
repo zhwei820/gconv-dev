@@ -9,10 +9,9 @@ package empty_test
 import (
 	"testing"
 
-	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv"
 	"github.com/zhwei820/gconv/internal/empty"
 	"github.com/zhwei820/gconv/test/gtest"
-	"github.com/zhwei820/gconv/util/gconv"
 )
 
 type TestInt int
@@ -70,9 +69,9 @@ func TestIsEmpty(t *testing.T) {
 		t.Assert(empty.IsEmpty(false), true)
 		t.Assert(empty.IsEmpty([]byte("")), true)
 		t.Assert(empty.IsEmpty(""), true)
-		t.Assert(empty.IsEmpty(g.Map{}), true)
-		t.Assert(empty.IsEmpty(g.Slice{}), true)
-		t.Assert(empty.IsEmpty(g.Array{}), true)
+		t.Assert(empty.IsEmpty(map[string]interface{}{}), true)
+		t.Assert(empty.IsEmpty([]interface{}{}), true)
+		t.Assert(empty.IsEmpty([]interface{}{}), true)
 		t.Assert(empty.IsEmpty(tmpT2), true)
 		t.Assert(empty.IsEmpty(tmpT3), true)
 		t.Assert(empty.IsEmpty(tmpT3), true)
@@ -98,9 +97,9 @@ func TestIsEmpty(t *testing.T) {
 		t.Assert(empty.IsEmpty(true), false)
 		t.Assert(empty.IsEmpty(tmpT1), false)
 		t.Assert(empty.IsEmpty([]byte("1")), false)
-		t.Assert(empty.IsEmpty(g.Map{"a": 1}), false)
-		t.Assert(empty.IsEmpty(g.Slice{"1"}), false)
-		t.Assert(empty.IsEmpty(g.Array{"1"}), false)
+		t.Assert(empty.IsEmpty(map[string]interface{}{"a": 1}), false)
+		t.Assert(empty.IsEmpty([]interface{}{"1"}), false)
+		t.Assert(empty.IsEmpty([]interface{}{"1"}), false)
 		t.Assert(empty.IsEmpty(tmpF2), false)
 		t.Assert(empty.IsEmpty(tmpF3), false)
 		t.Assert(empty.IsEmpty(tmpF4), false)
