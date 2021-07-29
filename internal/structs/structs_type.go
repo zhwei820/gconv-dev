@@ -2,14 +2,14 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package structs
 
 import (
 	"reflect"
 
-	"github.com/zhwei820/g/errors/gerror"
+	"github.com/zhwei820/gconv/errors/gerror"
 )
 
 // StructType retrieves and returns the struct Type of specified struct/*struct.

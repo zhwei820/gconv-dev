@@ -2,7 +2,7 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package utils_test
 
@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/zhwei820/g/internal/utils"
+	"github.com/zhwei820/gconv/internal/utils"
 )
 
 var (

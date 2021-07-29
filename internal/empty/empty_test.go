@@ -2,7 +2,7 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package empty_test
 
@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/zhwei820/g"
-	"github.com/zhwei820/g/internal/empty"
-	"github.com/zhwei820/g/test/gtest"
-	"github.com/zhwei820/g/util/gconv"
+	"github.com/zhwei820/gconv/internal/empty"
+	"github.com/zhwei820/gconv/test/gtest"
+	"github.com/zhwei820/gconv/util/gconv"
 )
 
 type TestInt int

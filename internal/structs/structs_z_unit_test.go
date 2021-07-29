@@ -2,18 +2,17 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package structs_test
 
 import (
 	"testing"
 
-	"github.com/zhwei820/g/internal/structs"
-
 	"github.com/zhwei820/g"
+	"github.com/zhwei820/gconv/internal/structs"
 
-	"github.com/zhwei820/g/test/gtest"
+	"github.com/zhwei820/gconv/test/gtest"
 )
 
 func Test_Basic(t *testing.T) {
@@ -155,7 +154,7 @@ func Test_StructType(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A))
 		t.AssertNil(err)
-		t.Assert(r.Signature(), `github.com/zhwei820/g/internal/structs_test/structs_test.A`)
+		t.Assert(r.Signature(), `github.com/zhwei820/gconv/internal/structs_test/structs_test.A`)
 	})
 	gtest.C(t, func(t *gtest.T) {
 		type B struct {
@@ -166,7 +165,7 @@ func Test_StructType(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A).B)
 		t.AssertNil(err)
-		t.Assert(r.Signature(), `github.com/zhwei820/g/internal/structs_test/structs_test.B`)
+		t.Assert(r.Signature(), `github.com/zhwei820/gconv/internal/structs_test/structs_test.B`)
 	})
 	gtest.C(t, func(t *gtest.T) {
 		type B struct {
@@ -203,7 +202,7 @@ func Test_StructTypeBySlice(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A).Array)
 		t.AssertNil(err)
-		t.Assert(r.Signature(), `github.com/zhwei820/g/internal/structs_test/structs_test.B`)
+		t.Assert(r.Signature(), `github.com/zhwei820/gconv/internal/structs_test/structs_test.B`)
 	})
 	gtest.C(t, func(t *gtest.T) {
 		type B struct {
@@ -214,7 +213,7 @@ func Test_StructTypeBySlice(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A).Array)
 		t.AssertNil(err)
-		t.Assert(r.Signature(), `github.com/zhwei820/g/internal/structs_test/structs_test.B`)
+		t.Assert(r.Signature(), `github.com/zhwei820/gconv/internal/structs_test/structs_test.B`)
 	})
 	gtest.C(t, func(t *gtest.T) {
 		type B struct {
@@ -225,7 +224,7 @@ func Test_StructTypeBySlice(t *testing.T) {
 		}
 		r, err := structs.StructType(new(A).Array)
 		t.AssertNil(err)
-		t.Assert(r.Signature(), `github.com/zhwei820/g/internal/structs_test/structs_test.B`)
+		t.Assert(r.Signature(), `github.com/zhwei820/gconv/internal/structs_test/structs_test.B`)
 	})
 }
 

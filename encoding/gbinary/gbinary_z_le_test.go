@@ -2,15 +2,15 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package gbinary_test
 
 import (
 	"testing"
 
-	"github.com/zhwei820/g/encoding/gbinary"
-	"github.com/zhwei820/g/test/gtest"
+	"github.com/zhwei820/gconv/encoding/gbinary"
+	"github.com/zhwei820/gconv/test/gtest"
 )
 
 func Test_LeEncodeAndLeDecode(t *testing.T) {

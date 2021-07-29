@@ -1,3 +1,3 @@
-module github.com/zhwei820/g
+module github.com/zhwei820/gconv
 
 go 1.16

@@ -2,7 +2,7 @@
 //
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file,
-// You can obtain one at https://github.com/zhwei820/g.
+// You can obtain one at https://github.com/zhwei820/gconv.
 
 package mutex_test
 
@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zhwei820/g/internal/mutex"
-	"github.com/zhwei820/g/test/gtest"
+	"github.com/zhwei820/gconv/internal/mutex"
+	"github.com/zhwei820/gconv/test/gtest"
 )
 
 func TestMutexIsSafe(t *testing.T) {
