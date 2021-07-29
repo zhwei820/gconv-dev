@@ -41,8 +41,7 @@ ok      github.com/zhwei820/gconv/test/gtest    1.506s
 基本类型转换。
 
 ```
-john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/zhwei820/gconv$ go test *.go -bench=".*" -benchmem
-goos: linux
+john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/zhwei820/gconv$ go test *.go -bench=".*" -benchmem goos: linux 
 goarch: amd64
 BenchmarkString-4               20000000                71.8 ns/op            24 B/op          2 allocs/op
 BenchmarkInt-4                  100000000               22.2 ns/op             8 B/op          1 allocs/op
