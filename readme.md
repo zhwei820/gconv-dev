@@ -1,6 +1,4 @@
-### gconv
-
-
+### gconv Created by [郭强](https://goframe.org/display/~john)
 
 ## gconv
 
@@ -68,11 +66,6 @@ PASS
 ok      command-line-arguments  35.356s
 ```
 
-[Skip to end of metadata](https://goframe.org/pages/viewpage.action?pageId=1114317#page-metadata-end)
-
-- Created by [郭强](https://goframe.org/display/~john), last modified by [wakaka](https://goframe.org/display/~wakaka) on [Jun 01, 2021](https://goframe.org/pages/diffpagesbyversion.action?pageId=1114317&selectedPageVersions=10&selectedPageVersions=11 "Show changes")
-
-[Go to start of metadata](https://goframe.org/pages/viewpage.action?pageId=1114317#page-metadata-start)
 
 常用基本类型的转换方法比较简单，我们这里使用一个例子来演示转换方法的使用及效果。
 
